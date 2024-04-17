@@ -1,5 +1,6 @@
 import styles from './App.module.scss';
 import { Breadcrumbs } from './components/Breadcrumbs';
+import { IssueColumns } from './components/IssueColumns';
 import { IssueFetcher } from './components/IssueFetcher';
 
 function App() {
@@ -9,6 +10,8 @@ function App() {
         <IssueFetcher />
 
         <Breadcrumbs />
+
+        <IssueColumns />
       </div>
     </section>
   );

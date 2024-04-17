@@ -1,0 +1,8 @@
+.issuesCards {
+  background-color: #CED4DA;
+  padding: 10px 15px;
+
+  &__card:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
