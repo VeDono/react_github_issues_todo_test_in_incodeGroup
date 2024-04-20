@@ -13,10 +13,6 @@ interface Props {
 export const IssueCards: FC<Props> = ({ issuesId, columnType }) => {
   const issues = useAppSelector((state) => state.issues);
 
-  // const issuesForRender = issues.filter((issue) =>
-  //   issuesId?.includes(issue.id),
-  // );
-
   const issuesForRender =
     issuesId?.map((issueId) => issues.find((issue) => issue.id === issueId)) ||
     [];
