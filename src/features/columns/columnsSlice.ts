@@ -1,12 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface InitialStateType {
-  todo: number[];
-  inProgress: number[];
-  done: number[];
-}
+import { ColumnsInitialStateType } from '../../types/ColumnsInitialStateType';
 
-const initialState: InitialStateType = {
+const initialState: ColumnsInitialStateType = {
   todo: [],
   inProgress: [],
   done: [],
@@ -19,9 +15,26 @@ export const columnsSlice = createSlice({
     addIssue: (state, action: PayloadAction<number>) => {
       state.todo.push(action.payload);
     },
+    moveIssue: (
+      state,
+      action: PayloadAction<{
+        issueId: number;
+        from: keyof ColumnsInitialStateType;
+        to: keyof ColumnsInitialStateType;
+      }>,
+    ) => {
+      const { issueId, from, to } = action.payload;
+      const index = state[from].findIndex((idOfIssue) => idOfIssue === issueId);
+
+      if (index !== -1) {
+        const draggableIssue = state[from].splice(index, 1);
+
+        state[to].push(...draggableIssue);
+      }
+    },
   },
 });
 
-export const { addIssue } = columnsSlice.actions;
+export const { addIssue, moveIssue } = columnsSlice.actions;
 
 export default columnsSlice.reducer;

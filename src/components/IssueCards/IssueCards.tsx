@@ -7,9 +7,10 @@ import { useAppSelector } from '../../app/hooks';
 
 interface Props {
   issuesId?: number[];
+  columnType: 'todo' | 'inProgress' | 'done';
 }
 
-export const IssueCards: FC<Props> = ({ issuesId }) => {
+export const IssueCards: FC<Props> = ({ issuesId, columnType }) => {
   const issues = useAppSelector((state) => state.issues);
 
   const issuesForRender = issues.filter((issue) =>
@@ -17,7 +18,7 @@ export const IssueCards: FC<Props> = ({ issuesId }) => {
   );
 
   return (
-    <Droppable droppableId="droppable">
+    <Droppable droppableId={columnType}>
       {(provided) => (
         <article
           className={styles.issuesCards}
