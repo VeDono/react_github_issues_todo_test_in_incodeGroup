@@ -15,21 +15,39 @@ export const columnsSlice = createSlice({
     addIssue: (state, action: PayloadAction<number>) => {
       state.todo.push(action.payload);
     },
+    // moveIssue: (
+    //   state,
+    //   action: PayloadAction<{
+    //     issueId: number;
+    //     from: keyof ColumnsInitialStateType;
+    //     to: keyof ColumnsInitialStateType;
+    //   }>,
+    // ) => {
+    //   const { issueId, from, to } = action.payload;
+    //   const index = state[from].findIndex((idOfIssue) => idOfIssue === issueId);
+
+    //   if (index !== -1) {
+    //     const draggableIssue = state[from].splice(index, 1);
+
+    //     state[to].push(...draggableIssue);
+    //   }
+    // },
     moveIssue: (
       state,
       action: PayloadAction<{
         issueId: number;
         from: keyof ColumnsInitialStateType;
         to: keyof ColumnsInitialStateType;
+        indexInDestinationColumn: number;
       }>,
     ) => {
-      const { issueId, from, to } = action.payload;
+      const { issueId, from, to, indexInDestinationColumn } = action.payload;
       const index = state[from].findIndex((idOfIssue) => idOfIssue === issueId);
 
       if (index !== -1) {
-        const draggableIssue = state[from].splice(index, 1);
+        const [draggableIssue] = state[from].splice(index, 1);
 
-        state[to].push(...draggableIssue);
+        state[to].splice(indexInDestinationColumn, 0, draggableIssue);
       }
     },
   },

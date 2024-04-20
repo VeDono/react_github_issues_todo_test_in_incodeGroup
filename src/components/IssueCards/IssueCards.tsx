@@ -13,9 +13,13 @@ interface Props {
 export const IssueCards: FC<Props> = ({ issuesId, columnType }) => {
   const issues = useAppSelector((state) => state.issues);
 
-  const issuesForRender = issues.filter((issue) =>
-    issuesId?.includes(issue.id),
-  );
+  // const issuesForRender = issues.filter((issue) =>
+  //   issuesId?.includes(issue.id),
+  // );
+
+  const issuesForRender =
+    issuesId?.map((issueId) => issues.find((issue) => issue.id === issueId)) ||
+    [];
 
   return (
     <Droppable droppableId={columnType}>
@@ -25,25 +29,28 @@ export const IssueCards: FC<Props> = ({ issuesId, columnType }) => {
           ref={provided.innerRef}
           {...provided.droppableProps}
         >
-          {issuesForRender.map((issue, index) => (
-            <Draggable
-              key={issue.id}
-              draggableId={String(issue.id)}
-              index={index}
-            >
-              {(providedCard) => (
-                <Card
-                  ref={providedCard.innerRef}
-                  {...providedCard.draggableProps}
-                  {...providedCard.dragHandleProps}
-                  className={styles.issuesCards__card}
-                  title={issue.title}
+          {issuesForRender.map(
+            (issue, index) =>
+              issue && (
+                <Draggable
+                  key={issue.id}
+                  draggableId={String(issue.id)}
+                  index={index}
                 >
-                  Card content
-                </Card>
-              )}
-            </Draggable>
-          ))}
+                  {(providedCard) => (
+                    <Card
+                      ref={providedCard.innerRef}
+                      {...providedCard.draggableProps}
+                      {...providedCard.dragHandleProps}
+                      className={styles.issuesCards__card}
+                      title={issue.title}
+                    >
+                      Card content
+                    </Card>
+                  )}
+                </Draggable>
+              ),
+          )}
           {provided.placeholder}
         </article>
       )}

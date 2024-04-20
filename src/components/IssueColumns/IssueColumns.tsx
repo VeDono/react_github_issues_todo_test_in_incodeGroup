@@ -28,6 +28,7 @@ export const IssueColumns: FC = () => {
       issueId: Number(draggableId),
       from: source.droppableId as keyof ColumnsInitialStateType,
       to: destination.droppableId as keyof ColumnsInitialStateType,
+      indexInDestinationColumn: destination.index,
     };
 
     dispatch(moveIssue(payload));
