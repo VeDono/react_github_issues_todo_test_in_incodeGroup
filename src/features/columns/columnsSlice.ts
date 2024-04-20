@@ -13,7 +13,19 @@ export const columnsSlice = createSlice({
   initialState,
   reducers: {
     addIssue: (state, action: PayloadAction<number>) => {
-      state.todo.push(action.payload);
+      const receivedIssueId = action.payload;
+
+      const hasDuplicates = (
+        Object.keys(state) as Array<keyof ColumnsInitialStateType>
+      ).some((column) =>
+        state[column].some((issueId: number) => issueId === receivedIssueId),
+      );
+
+      if (hasDuplicates) {
+        return;
+      }
+
+      state.todo.push(receivedIssueId);
     },
     moveIssue: (
       state,
