@@ -15,9 +15,6 @@ export const IssueColumns: FC = () => {
   const handleDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
-    // eslint-disable-next-line no-console
-    console.log(result);
-
     if (
       !destination ||
       (source.droppableId === destination.droppableId &&
