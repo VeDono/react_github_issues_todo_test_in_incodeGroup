@@ -38,6 +38,10 @@ export const IssueFetcher: FC = () => {
     } catch (error) {
       alert('Something went wrong during issues loading 😥');
     }
+
+    if (document.activeElement) {
+      (document.activeElement as HTMLElement).blur();
+    }
   };
 
   return (
