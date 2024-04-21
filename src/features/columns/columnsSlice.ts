@@ -2,11 +2,11 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { ColumnsInitialStateType } from '../../types/ColumnsInitialStateType';
 
-const initialState: ColumnsInitialStateType = {
-  todo: [],
-  inProgress: [],
-  done: [],
-};
+const savedRepoUrl = localStorage.getItem('repoUrl') || '';
+const savedState = localStorage.getItem(`columns_${savedRepoUrl}`);
+const initialState: ColumnsInitialStateType = savedState
+  ? JSON.parse(savedState)
+  : { todo: [], inProgress: [], done: [] };
 
 export const columnsSlice = createSlice({
   name: 'columns',
