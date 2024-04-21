@@ -45,9 +45,17 @@ export const columnsSlice = createSlice({
         state[to].splice(indexInDestinationColumn, 0, draggableIssue);
       }
     },
+    clearColumns: (state) => {
+      // eslint-disable-next-line no-param-reassign
+      state.todo = [];
+      // eslint-disable-next-line no-param-reassign
+      state.inProgress = [];
+      // eslint-disable-next-line no-param-reassign
+      state.done = [];
+    },
   },
 });
 
-export const { addIssue, moveIssue } = columnsSlice.actions;
+export const { addIssue, moveIssue, clearColumns } = columnsSlice.actions;
 
 export default columnsSlice.reducer;

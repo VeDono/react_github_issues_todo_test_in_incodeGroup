@@ -7,7 +7,7 @@ import { transformUrl } from '../../utils/transformUrl';
 import { isGitHubLink } from '../../utils/isGitHubLink';
 import { useAppDispatch } from '../../app/hooks';
 import { set as issuesSet } from '../../features/issues/issuesSlice';
-import { set as repoUrlSet } from '../../features/repoUrl/repoUrlSlice';
+import { setRepoUrlAndClearColumns } from '../../features/repoUrl/repoUrlSlice';
 import { addIssue } from '../../features/columns/columnsSlice';
 import { Issue } from '../../types/Issue';
 
@@ -27,7 +27,7 @@ export const IssueFetcher: FC = () => {
 
     const apiUrl = transformUrl(inputValue);
 
-    dispatch(repoUrlSet(inputValue));
+    dispatch(setRepoUrlAndClearColumns(inputValue));
 
     try {
       const { data }: { data: Issue[] } = await axios.get(apiUrl);
