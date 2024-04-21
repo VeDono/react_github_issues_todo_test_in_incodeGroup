@@ -4,16 +4,58 @@
   justify-content: space-between;
   margin-bottom: 20px;
 
-  &__input {
+  &__inputWrapper {
     width: 85%;
+    display: flex;
+    position: relative;
+  }
+
+  &__inputWrongMessage {
+    opacity: 0;
+    z-index: -1;
+
+    right: 10px;
+    position: absolute;
+
+    font-size: 16px;
+    color: #dd3e1e;
+
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateY(0px);
+
+    &--show {
+      opacity: 1;
+      transform: translateY(40px);
+    }
+  }
+
+  &__input {
+    width: 100%;
     border: 1px solid #5f5f5f;
     outline: none;
     border-radius: 3px;
+
+    &--wrong {
+      border: 1px solid #dd3e1e;
+    }
   }
 
   &__submitBtn {
     width: 130px;
     height: 30px;
     border-radius: 3px;
+    transition: transform 0.2s ease-in-out;
+
+    &--wrong {
+      border: 1px solid #dd3e1e;
+    }
+
+    &:hover {
+      transform: translate(0px, -2px);
+    }
+
+    &:active {
+      transform: translate(0px, 0.5px);
+    }
   }
 }
