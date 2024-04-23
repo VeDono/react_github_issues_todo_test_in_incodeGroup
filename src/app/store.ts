@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import issuesReducer from '../features/issues/issuesSlice';
-import columnsReducer, { clearColumns } from '../features/columns/columnsSlice';
+import columnsReducer, {
+  addIssue,
+  moveIssue,
+} from '../features/columns/columnsSlice';
 import repoUrlReducer from '../features/repoUrl/repoUrlSlice';
 import lastActionReducer from '../features/lastAction/lastActionSlice';
 
@@ -17,11 +20,21 @@ export const store = configureStore({
 store.subscribe(() => {
   const currentState = store.getState();
 
-  if (currentState.lastAction !== clearColumns.type) {
+  if (
+    currentState.lastAction === addIssue.type ||
+    currentState.lastAction === moveIssue.type
+  ) {
     const savedStateString = localStorage.getItem('columns');
     const savedState = savedStateString ? JSON.parse(savedStateString) : {};
 
+    // eslint-disable-next-line no-console
+    console.log(
+      // eslint-disable-next-line max-len
+      `subscribe: todo:${currentState.columns.todo}, inProgress:${currentState.columns.inProgress}, done:${currentState.columns.done}, ${currentState.repoUrl.repoUrl}`,
+    );
+
     savedState[currentState.repoUrl.repoUrl] = currentState.columns;
+
     localStorage.setItem('columns', JSON.stringify(savedState));
   }
 });

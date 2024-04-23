@@ -4,15 +4,15 @@ import { addIssue, moveIssue, clearColumns } from '../columns/columnsSlice';
 
 const lastActionSlice = createSlice({
   name: 'lastAction',
-  initialState: '',
+  initialState: 'columns/clearColumns',
   reducers: {
     setLastAction: (state, action: PayloadAction<string>) => action.payload,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(addIssue, () => 'addIssue')
-      .addCase(moveIssue, () => 'moveIssue')
-      .addCase(clearColumns, () => 'clearColumns');
+      .addCase(addIssue, () => addIssue.type)
+      .addCase(moveIssue, () => moveIssue.type)
+      .addCase(clearColumns, () => clearColumns.type);
   },
 });
 

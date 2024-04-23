@@ -1,12 +1,13 @@
+/* eslint-disable no-param-reassign */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { ColumnsInitialStateType } from '../../types/ColumnsInitialStateType';
 
-const savedRepoUrl = localStorage.getItem('repoUrl') || '';
-const savedState = localStorage.getItem(`columns_${savedRepoUrl}`);
-const initialState: ColumnsInitialStateType = savedState
-  ? JSON.parse(savedState)
-  : { todo: [], inProgress: [], done: [] };
+const initialState: ColumnsInitialStateType = {
+  todo: [],
+  inProgress: [],
+  done: [],
+};
 
 export const columnsSlice = createSlice({
   name: 'columns',
@@ -45,17 +46,33 @@ export const columnsSlice = createSlice({
         state[to].splice(indexInDestinationColumn, 0, draggableIssue);
       }
     },
+    loadColumnsFromLocalStorage: (state) => {
+      const savedRepoUrl = localStorage.getItem('repoUrl') || '';
+      const savedColumns = localStorage.getItem(`columns`);
+      const parsedColumns = savedColumns ? JSON.parse(savedColumns) : {};
+      const savedOrder = parsedColumns[savedRepoUrl] || {
+        todo: [],
+        inProgress: [],
+        done: [],
+      };
+
+      state.todo = savedOrder.todo;
+      state.inProgress = savedOrder.inProgress;
+      state.done = savedOrder.done;
+    },
     clearColumns: (state) => {
-      // eslint-disable-next-line no-param-reassign
-      state.todo = [];
-      // eslint-disable-next-line no-param-reassign
-      state.inProgress = [];
-      // eslint-disable-next-line no-param-reassign
-      state.done = [];
+      state.todo.splice(0, state.todo.length);
+      state.inProgress.splice(0, state.inProgress.length);
+      state.done.splice(0, state.done.length);
     },
   },
 });
 
-export const { addIssue, moveIssue, clearColumns } = columnsSlice.actions;
+export const {
+  addIssue,
+  moveIssue,
+  clearColumns,
+  loadColumnsFromLocalStorage,
+} = columnsSlice.actions;
 
 export default columnsSlice.reducer;
