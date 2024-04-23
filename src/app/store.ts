@@ -27,12 +27,6 @@ store.subscribe(() => {
     const savedStateString = localStorage.getItem('columns');
     const savedState = savedStateString ? JSON.parse(savedStateString) : {};
 
-    // eslint-disable-next-line no-console
-    console.log(
-      // eslint-disable-next-line max-len
-      `subscribe: todo:${currentState.columns.todo}, inProgress:${currentState.columns.inProgress}, done:${currentState.columns.done}, ${currentState.repoUrl.repoUrl}`,
-    );
-
     savedState[currentState.repoUrl.repoUrl] = currentState.columns;
 
     localStorage.setItem('columns', JSON.stringify(savedState));

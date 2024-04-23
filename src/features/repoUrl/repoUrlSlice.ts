@@ -32,8 +32,6 @@ export const setRepoUrlAndClearColumns = createAsyncThunk(
     dispatch(clearColumns());
     dispatch(wipeIssues());
     dispatch(set(url));
-    // eslint-disable-next-line no-console
-    console.log('setRepoUrlAndClearColumns');
   },
 );
 
