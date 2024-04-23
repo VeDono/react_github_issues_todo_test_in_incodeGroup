@@ -1,5 +1,8 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { clearColumns } from '../columns/columnsSlice';
+import { wipe as wipeIssues } from '../issues/issuesSlice';
+// import { RootState } from '../../app/store';
 
 interface InitialStateType {
   repoUrl: string;
@@ -26,8 +29,11 @@ export const { set } = repoUrlSlice.actions;
 export const setRepoUrlAndClearColumns = createAsyncThunk(
   'repoUrl/setAndClearColumns',
   async (url: string, { dispatch }) => {
-    dispatch(set(url));
     dispatch(clearColumns());
+    dispatch(wipeIssues());
+    dispatch(set(url));
+    // eslint-disable-next-line no-console
+    console.log('setRepoUrlAndClearColumns');
   },
 );
 

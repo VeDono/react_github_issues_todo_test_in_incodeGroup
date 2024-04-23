@@ -17,9 +17,12 @@ export const issuesSlice = createSlice({
 
       state.push(...action.payload);
     },
+    wipe: (state) => {
+      state.splice(0, state.length);
+    },
   },
 });
 
-export const { set } = issuesSlice.actions;
+export const { set, wipe } = issuesSlice.actions;
 
 export default issuesSlice.reducer;

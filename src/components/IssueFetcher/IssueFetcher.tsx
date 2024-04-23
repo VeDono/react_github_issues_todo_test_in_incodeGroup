@@ -6,9 +6,12 @@ import styles from './IssueFetcher.module.scss';
 import { transformUrl } from '../../utils/transformUrl';
 import { isGitHubLink } from '../../utils/isGitHubLink';
 import { useAppDispatch } from '../../app/hooks';
-import { set as issuesSet } from '../../features/issues/issuesSlice';
+import { set as setIssues } from '../../features/issues/issuesSlice';
 import { setRepoUrlAndClearColumns } from '../../features/repoUrl/repoUrlSlice';
-import { addIssue } from '../../features/columns/columnsSlice';
+import {
+  addIssue,
+  loadColumnsFromLocalStorage,
+} from '../../features/columns/columnsSlice';
 import { Issue } from '../../types/Issue';
 
 export const IssueFetcher: FC = () => {
@@ -28,11 +31,12 @@ export const IssueFetcher: FC = () => {
     const apiUrl = transformUrl(inputValue);
 
     dispatch(setRepoUrlAndClearColumns(inputValue));
+    dispatch(loadColumnsFromLocalStorage());
 
     try {
       const { data }: { data: Issue[] } = await axios.get(apiUrl);
 
-      dispatch(issuesSet(data));
+      dispatch(setIssues(data));
 
       data.map((issue) => dispatch(addIssue(issue.id)));
 
@@ -40,6 +44,8 @@ export const IssueFetcher: FC = () => {
       setHasUrlError(false);
     } catch (error) {
       alert('Something went wrong during issues loading 😥');
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
 
     if (document.activeElement) {
