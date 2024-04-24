@@ -7,12 +7,20 @@ import { transformUrl } from '../../utils/transformUrl';
 import { isGitHubLink } from '../../utils/isGitHubLink';
 import { useAppDispatch } from '../../app/hooks';
 import { set as setIssues } from '../../features/issues/issuesSlice';
-import { setRepoUrlAndClearColumns } from '../../features/repoUrl/repoUrlSlice';
+import {
+  setRepoData,
+  setRepoUrlAndClearColumns,
+} from '../../features/repo/repoSlice';
 import {
   addIssue,
   loadColumnsFromLocalStorage,
 } from '../../features/columns/columnsSlice';
 import { Issue } from '../../types/Issue';
+import { RepoData } from '../../types/RepoData';
+import {
+  setLoadingTrue,
+  setLoadingFalse,
+} from '../../features/loading/loadingSlice';
 
 export const IssueFetcher: FC = () => {
   const dispatch = useAppDispatch();
@@ -22,23 +30,28 @@ export const IssueFetcher: FC = () => {
   const handlerSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    dispatch(setLoadingTrue());
+
     if (!isGitHubLink(inputValue)) {
       setHasUrlError(true);
 
       return;
     }
 
-    const apiUrl = transformUrl(inputValue);
+    const apiIssuesUrl = transformUrl(inputValue, 'issues');
+    const apiRepoUrl = transformUrl(inputValue, 'repo');
 
     dispatch(setRepoUrlAndClearColumns(inputValue));
     dispatch(loadColumnsFromLocalStorage());
 
     try {
-      const { data }: { data: Issue[] } = await axios.get(apiUrl);
+      const issuesData: Issue[] = await (await axios.get(apiIssuesUrl)).data;
+      const repoData: RepoData = await (await axios.get(apiRepoUrl)).data;
 
-      dispatch(setIssues(data));
+      dispatch(setIssues(issuesData));
+      dispatch(setRepoData(repoData));
 
-      data.map((issue) => dispatch(addIssue(issue.id)));
+      issuesData.map((issue) => dispatch(addIssue(issue.id)));
 
       setInputValue('');
       setHasUrlError(false);
@@ -51,6 +64,8 @@ export const IssueFetcher: FC = () => {
     if (document.activeElement) {
       (document.activeElement as HTMLElement).blur();
     }
+
+    dispatch(setLoadingFalse());
   };
 
   return (

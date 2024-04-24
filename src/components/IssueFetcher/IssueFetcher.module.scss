@@ -1,8 +1,11 @@
+@import '../../styles/mixins/fonts-mixins.scss';
+
 .issueFetcher {
   width: 100%;
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  @include font-medium(16px);
 
   &__inputWrapper {
     width: 85%;

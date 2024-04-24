@@ -5,15 +5,17 @@ import columnsReducer, {
   addIssue,
   moveIssue,
 } from '../features/columns/columnsSlice';
-import repoUrlReducer from '../features/repoUrl/repoUrlSlice';
+import repoReducer from '../features/repo/repoSlice';
 import lastActionReducer from '../features/lastAction/lastActionSlice';
+import loadingReducer from '../features/loading/loadingSlice';
 
 export const store = configureStore({
   reducer: {
     issues: issuesReducer,
     columns: columnsReducer,
-    repoUrl: repoUrlReducer,
+    repo: repoReducer,
     lastAction: lastActionReducer,
+    loading: loadingReducer,
   },
 });
 
@@ -27,7 +29,7 @@ store.subscribe(() => {
     const savedStateString = localStorage.getItem('columns');
     const savedState = savedStateString ? JSON.parse(savedStateString) : {};
 
-    savedState[currentState.repoUrl.repoUrl] = currentState.columns;
+    savedState[currentState.repo.repoUrl] = currentState.columns;
 
     localStorage.setItem('columns', JSON.stringify(savedState));
   }

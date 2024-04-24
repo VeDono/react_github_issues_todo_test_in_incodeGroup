@@ -1,9 +1,23 @@
+@import '../../styles/mixins/fonts-mixins.scss';
+
 .issuesCards {
   background-color: #CED4DA;
   border-radius: 5px;
   padding: 10px 15px;
+  max-height: 550px;
+  overflow: auto;
 
-  &__card:not(:last-child) {
-    margin-bottom: 20px;
+  &__card {
+    overflow: hidden;
+    @include font-bold(16px);
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    &-content {
+      white-space: nowrap;
+      @include font-medium(14px);
+    }
   }
 }

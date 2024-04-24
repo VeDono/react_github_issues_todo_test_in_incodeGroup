@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Card } from 'antd';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { differenceInDays } from 'date-fns';
 
 import styles from './IssueCards.module.scss';
 import { useAppSelector } from '../../app/hooks';
@@ -16,6 +17,8 @@ export const IssueCards: FC<Props> = ({ issuesId, columnType }) => {
   const issuesForRender =
     issuesId?.map((issueId) => issues.find((issue) => issue.id === issueId)) ||
     [];
+
+  const currentTime = new Date();
 
   return (
     <Droppable droppableId={columnType}>
@@ -41,7 +44,12 @@ export const IssueCards: FC<Props> = ({ issuesId, columnType }) => {
                       className={styles.issuesCards__card}
                       title={issue.title}
                     >
-                      Card content
+                      <div className={styles['issuesCards__card-content']}>
+                        {`#${issue.number}`}{' '}
+                        {`opened ${differenceInDays(currentTime, issue.created_at)}`}{' '}
+                        {'days ago'}
+                        <div>{`${issue.user.login} | Comments: ${issue.comments}`}</div>
+                      </div>
                     </Card>
                   )}
                 </Draggable>
