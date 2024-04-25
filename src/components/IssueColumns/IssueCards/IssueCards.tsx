@@ -5,7 +5,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { differenceInDays } from 'date-fns';
 
 import styles from './IssueCards.module.scss';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../../app/hooks';
 
 interface Props {
   issuesId?: number[];

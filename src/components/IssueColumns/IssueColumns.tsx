@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Row, Col } from 'antd';
-import { IssueCards } from '../IssueCards';
+import { IssueCards } from './IssueCards';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import cn from 'classnames';
 
