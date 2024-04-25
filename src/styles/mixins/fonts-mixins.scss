@@ -1,19 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-
-@mixin font-regular($size: 16px) {
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-size: $size;
+@font-face {
+  font-family: 'Optimistic_Display-Medium';
+  src: url('../../fonts/Optimistic_Display_W_Md.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
 }
 
 @mixin font-medium($size: 16px) {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Optimistic_Display-Medium', sans-serif;
   font-weight: 500;
   font-size: $size;
 }
 
-@mixin font-semibold($size: 16px) {
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
+@font-face {
+  font-family: 'Optimistic_Display-Bold';
+  src: url('../../fonts/Optimistic_Display_W_Bd.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@mixin font-bold($size: 16px) {
+  font-family: 'Optimistic_Display-Bold', sans-serif;
+  font-weight: 700;
   font-size: $size;
 }

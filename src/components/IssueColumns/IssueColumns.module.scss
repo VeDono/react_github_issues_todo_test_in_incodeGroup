@@ -1,7 +1,30 @@
+@import '../../styles/mixins/fonts-mixins.scss';
+
 .issueColumns {
+  margin-bottom: 20px;
+
   &__columnTitle {
     text-align: center;
     margin-bottom: 10px;
-    font-size: 20px;
+    @include font-bold(20px);
+  }
+}
+
+.emptyMessage {
+  height: 50px;
+  background: #CED4DA;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include font-bold(20px);
+  transition: all 0.3s ease-in-out;
+
+  opacity: 0;
+  transform: translateY(-10px);
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }
