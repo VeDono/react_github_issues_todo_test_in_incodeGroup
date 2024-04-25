@@ -1,7 +1,6 @@
 # Test task in incodeGroup
 
-## Demo
-[Demo](https://vedono.github.io/react_github_issues_todo_test_in_incodeGroup/)
+## [DEMO](https://vedono.github.io/react_github_issues_todo_test_in_incodeGroup/)
 
 ## Description
 
