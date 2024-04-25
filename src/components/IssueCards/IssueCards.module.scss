@@ -9,6 +9,7 @@
 
   &__card {
     overflow: hidden;
+    text-overflow: ellipsis;
     @include font-bold(16px);
 
     &:not(:last-child) {
@@ -16,8 +17,13 @@
     }
 
     &-content {
-      white-space: nowrap;
       @include font-medium(14px);
+    }
+
+    &-row {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 }

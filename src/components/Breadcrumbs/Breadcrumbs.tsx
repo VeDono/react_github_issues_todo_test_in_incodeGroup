@@ -5,6 +5,7 @@ import styles from './Breadcrumbs.module.scss';
 import { useAppSelector } from '../../app/hooks';
 
 import starIcon from '../../images/star.png';
+import { truncateString } from '../../utils/truncateString';
 
 export const Breadcrumbs: FC = () => {
   const { name, html_url, owner, stargazers_count } = useAppSelector(
@@ -26,7 +27,7 @@ export const Breadcrumbs: FC = () => {
       <span className={styles.breadcrumbs__nestSign}>&gt;</span>
 
       <a target="_blank" rel="noreferrer" href={html_url}>
-        {name}
+        {truncateString(name, 12)}
       </a>
 
       {/* {!!stargazers_count && <span>{`${stargazers_count} stars`}</span>} */}

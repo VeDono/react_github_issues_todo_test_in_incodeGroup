@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { FC } from 'react';
 import { Card } from 'antd';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
@@ -45,10 +46,12 @@ export const IssueCards: FC<Props> = ({ issuesId, columnType }) => {
                       title={issue.title}
                     >
                       <div className={styles['issuesCards__card-content']}>
-                        {`#${issue.number}`}{' '}
-                        {`opened ${differenceInDays(currentTime, issue.created_at)}`}{' '}
-                        {'days ago'}
-                        <div>{`${issue.user.login} | Comments: ${issue.comments}`}</div>
+                        <div className={styles['issuesCards__card-row']}>
+                          {`#${issue.number} opened ${differenceInDays(currentTime, issue.created_at)} days ago`}
+                        </div>
+                        <div
+                          className={styles['issuesCards__card-row']}
+                        >{`${issue.user.login} | Comments: ${issue.comments}`}</div>
                       </div>
                     </Card>
                   )}
