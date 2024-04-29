@@ -16,6 +16,6 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "cypress"],
   "rules": { "max-len": ["error", 90] }
 }
