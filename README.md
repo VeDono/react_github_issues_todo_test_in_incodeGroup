@@ -30,13 +30,11 @@ After starting the application, insert the GitHub repository URL (for example ht
 Now you can load issues from the repo and make management on your think.
 The application automatically saves the order of loaded issues, so you cannot worry about your progress 🤝.
 
+[Example of working](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDlqcHYxMTNxc3I4bTc2Z2lhODV0MnEyNjc2MGZja3hwazV6bGJpdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ILVWNpMEhgYOho1wQF/giphy.gif)
+
 ## Testing
 
 After installing the project you can run tests by cypress. For running tests type "npm run test:cypress" and you cath the tests)
-
-[Example of working](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDlqcHYxMTNxc3I4bTc2Z2lhODV0MnEyNjc2MGZja3hwazV6bGJpdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ILVWNpMEhgYOho1wQF/giphy.gif)
-
-
 
 ## My contacts
 
