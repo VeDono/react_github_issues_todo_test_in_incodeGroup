@@ -34,7 +34,7 @@ The application automatically saves the order of loaded issues, so you cannot wo
 
 ## Testing
 
-After installing the project you can run tests by cypress. For running tests type "npm run test:cypress" and you cath the tests)
+After installing the project you can run tests by cypress. For running tests type "npm run test:cypress" and you catch the tests)
 
 ## My contacts
 
